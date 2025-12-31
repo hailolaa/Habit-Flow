@@ -78,10 +78,10 @@ export const Sidebar = ({ activeView, onViewChange }: SidebarProps) => {
             }}
             transition={{ duration: 0.3 }}
           >
-            <div className="w-10 h-10 rounded-xl bg-primary flex-shrink-0 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-primary flex-shrink-0 flex items-center justify-center ">
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="font-display text-xl font-semibold text-foreground">Habitune</span>
+            <span className="font-display text-l font-semibold text-foreground">Habitune</span>
           </motion.div>
 
           <div className={cn(
