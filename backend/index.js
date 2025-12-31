@@ -6,17 +6,27 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['http://localhost:3000'];
+const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['http://localhost:3000', 'http://localhost:3001'];
+
 app.use(cors({
     origin: (origin, callback) => {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1 && !allowedOrigins.includes('*')) {
-            return callback(new Error('The CORS policy for this site does not allow access from the specified Origin.'), false);
+
+        // Enable wildcard OR allow any vercel/localhost origin for ease of deployment
+        if (allowedOrigins.includes('*') ||
+            allowedOrigins.indexOf(origin) !== -1 ||
+            origin.includes('vercel.app') ||
+            origin.includes('localhost')) {
+            return callback(null, true);
+        } else {
+            console.log('Blocked Origin:', origin);
+            return callback(null, false); // Don't throw error, just don't allow
         }
-        return callback(null, true);
     },
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 
