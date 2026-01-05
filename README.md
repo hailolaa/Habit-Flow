@@ -2,7 +2,7 @@
 
 **Habit-Flow** is a comprehensive productivity and habit-tracking application designed to help you build better habits, achieve your goals, and stay org
 
-Live on https://habitune.vercel.app/login
+Live on https://habitune.vercel.app/
 
 ## Features
 
